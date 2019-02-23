@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack --mode production",
     "storybook": "start-storybook -p 9001 -c .storybook",
-    "storybook-build": "build-storybook -c .storybook -o build/storybook"
+    "storybook-build": "build-storybook -c .storybook -o build/storybook",
+    "deploy-storybook": "storybook-to-ghpages"
   },
   "repository": {
     "type": "git",
@@ -40,6 +41,7 @@
     "@storybook/addon-actions": "^4.1.13",
     "@storybook/addon-options": "^4.1.13",
     "@storybook/react": "^4.1.13",
+    "@storybook/storybook-deployer": "^2.8.1",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.4.2",
     "babel-loader": "^8.0.5",
