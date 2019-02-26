@@ -1,70 +1,52 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import withStyles from "react-jss";
 
-const styles = {
-    modal: {
-        display: "none",
-        position: "fixed",
-        zIndex: "1",
-        paddingTop: "100px",
-        left: "0",
-        top: "0",
-        width: "100%",
-        height: "100%",
-        overflow: "auto",
-        backgroundColor: "rgb(0,0,0)",
-        backgroundColor: "rgba(0,0,0,0.4)"
+// Importing styles
+import styles from "./styles";
 
-    },
-    modalContent: {
-        backgroundColor: "#fefefe",
-        margin: "auto",
-        padding: "20px",
-        border: "1px solid #888",
-        width: "80 %"
-    },
-    title: {
-        textAlign: "center",
-        textTransform: "uppercase",
-        color: "#4CAF50"
-    },
-    content: {
-        textIndent: "50px",
-        textAlign: "justify",
-        letterSpacing: "3px"
-    },
-    actions: {
-        background: "#F9FAFB",
-        padding: "1rem 1rem",
-        borderTop: "1px solid rgba(34, 36, 38, 0.15)",
-        textAlign: "right"
-    }
+import Portal from "../Portal";
+import Button from "../Button";
 
+class Modal extends Component {
+  /**
+   * @description Returns action components.
+   * @param {array} actions
+   * @returns {node}
+   */
+  renderActions = actions => {
+    return actions.map((e, i) => <Button {...e} key={`modal-action-${i}`} />);
+  };
+
+  render() {
+    const { classes, open, title, content, actions, onDismiss } = this.props;
+
+    // Return Fragment if modal is closed.
+    if (!open) return <React.Fragment />;
+
+    return (
+      <Portal>
+        <div onClick={onDismiss} className={classes.modal}>
+          <div
+            onClick={e => e.stopPropagation()}
+            className={classes.modalContent}>
+            <div className={classes.title}>{title}</div>
+            <div className={classes.content}>{content}</div>
+            <div className={classes.actions}>{this.renderActions(actions)}</div>
+          </div>
+        </div>
+      </Portal>
+    );
+  }
 }
 
-const Modal = props => {
-    const { classes } = props;
-    return ReactDOM.createPortal(
-        <div
-            onClick={props.onDismiss}
-            className={classes.modal}
-        >
-            <div
-                onClick={(e) => e.stopPropagation()}
-                className={classes.modalContent}
-            >
-                <div className={classes.title}>{props.title}</div>
-                <div className={classes.content}>
-                    {props.content}
-                </div>
-                <div className={classes.actions}>
-                    {props.actions}
-                </div>
-            </div>
-        </div>,
-        document.querySelector('#modal')
-    );
+Modal.propTypes = {
+  open: PropTypes.bool.isRequired,
+  title: PropTypes.string,
+  content: PropTypes.string,
+  actions: PropTypes.array,
+
+  onDismiss: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(Modal);
