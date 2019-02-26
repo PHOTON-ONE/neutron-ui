@@ -9,6 +9,20 @@
     "storybook-build": "build-storybook -c .storybook -o build/storybook",
     "deploy-storybook": "storybook-to-ghpages"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "files": [
+    "/dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/PHOTON-ONE/neutron-ui.git"
@@ -25,6 +39,7 @@
   },
   "homepage": "https://github.com/PHOTON-ONE/neutron-ui#readme",
   "dependencies": {
+    "@sambego/storybook-state": "^1.3.2",
     "prop-types": "^15.7.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
