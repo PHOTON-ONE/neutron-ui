@@ -39,7 +39,7 @@ storiesOf("Modal", module)
         content="Super Content"
         title="Super Title"
         onDismiss={() => store.set({ open: !store.get("open") })}
-        actions={[{content: "Action 01"}, {content: "Action 02"}]}
+        actions={[{content: "Action 01"}, {content: "Action 02", close: true}]}
         {...onActions}
       />
     );
