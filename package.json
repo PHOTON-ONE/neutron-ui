@@ -44,6 +44,7 @@
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-jss": "^8.6.1",
+    "react-table": "^6.9.2",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3"
   },
