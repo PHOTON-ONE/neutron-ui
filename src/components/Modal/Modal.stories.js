@@ -35,7 +35,8 @@ storiesOf("Modal", module)
   .add("default", () => {
     // The component we are testing
     const component = (
-      <Modal
+      <Modal key="modal"
+        open={store.get("open")}
         content="Super Content"
         title="Super Title"
         onDismiss={() => store.set({ open: !store.get("open") })}
@@ -48,7 +49,7 @@ storiesOf("Modal", module)
     const story = (
       <State store={store}>
         {component}
-        <Button onClick={() => store.set({ open: !store.get("open") })}>
+        <Button key="open"onClick={() => store.set({ open: !store.get("open") })}>
           Open Modal!
         </Button>
       </State>
