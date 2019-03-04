@@ -3,66 +3,105 @@ import PropTypes from "prop-types";
 import withStyles from "react-jss";
 
 const styles = {
-    root: {
-        color: "#99CC66"
-    },
-    thumbnail: {
-        borderRadius: "8px"
-    }
+  root: {
+    minWidth: "375px",
+    width: "400px",
+    height: "auto",
+    minHeight: "200px",
+    borderRadius: "8px",
+    position: "relative",
+    overflow: "hidden"
+
+  },
+  container: {
+    position: "absolute",
+    paddingTop: "2.5%",
+    paddingBottom: "2.5%",
+    width: "100%",
+    bottom: 0,
+    borderTop: "1px solid rgba(21, 21, 21, .3)",
+    background: "#BA68C8",
+    color: "#fff",
+    borderRadius: "8px",
+
+  },
+  content: {
+    position: "relative",
+    paddingLeft: "5%",
+    paddingRight: "5%",
+    lineHeight: "10px",
+  },
+  thumbnail: {
+    borderRadius: "8px",
+    width: "100%",
+    height: "100%",
+    marginTop: "-25px"
+  },
 };
 
 class NavTile extends Component {
-    /**
-     * @description FIlters defined props and returnes object of unknown props.
-     * @returns {object}
-     */
-    filterProps = () => {
-        let props = {...this.props};
-        const propTypes = Object.keys(NavTile.propTypes);
-        
-        propTypes.forEach(e => {
-            if(props[e]) delete props[e];
-        });
+  /**
+   * @description FIlters defined props and returnes object of unknown props.
+   * @returns {object}
+   */
+  filterProps = () => {
+    let props = { ...this.props };
+    const propTypes = Object.keys(NavTile.propTypes);
 
-        return props;
-    }
+    propTypes.forEach(e => {
+      if (props[e]) delete props[e];
+    });
 
-    /**
-     * @description Returns title.
-     * @argument {string} title Title of the tile.
-     * @returns {node}
-     */
-    renderTitle = title => {
-        return <h3>{title}</h3>;
-    }
+    return props;
+  };
 
-    /**
-     * @description Renders the thumbnail.
-     * @returns {node}
-     */
-    renderThumbnail = (image) => {
-        const {classes} = this.props;
+  /**
+   * @description Returns title.
+   * @argument {string} title Title of the tile.
+   * @returns {node}
+   */
+  renderTitle = title => {
+    return <h3>{title}</h3>;
+  };
 
-        return <img className={classes.thumbnail} src={image} />;
-    }
+  /**
+   * @description Renders the thumbnail.
+   * @returns {node}
+   */
+  renderThumbnail = image => {
+    return <img className={this.props.classes.thumbnail} src={image} />;
+  };
 
-    render() {
-        const {classes, title, image} = this.props;
+  renderContent = title => {
+    return (
+      <div className={this.props.classes.container}>
+        <div className={this.props.classes.content}>
+          {this.renderTitle(title)}
+          <p>{this.props.description}</p>
+        </div>
+      </div>
+    );
+  };
 
-        return <div className={classes.root} {...this.filterProps()}>
-            {this.renderThumbnail(image)}
-            {this.renderTitle(title)}
-        </div>;
-    }
+  render() {
+    const { classes, image, title } = this.props;
+
+    return (
+      <div className={classes.root} {...this.filterProps()}>
+        {this.renderThumbnail(image)}
+        {this.renderContent(title)}
+      </div>
+    );
+  }
 }
 
 NavTile.propTypes = {
-    classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
 
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string,
 
-    image: PropTypes.string.isRequired,
-}
+  image: PropTypes.string.isRequired,
+};
 
 export default withStyles(styles)(NavTile);
