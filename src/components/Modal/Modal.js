@@ -15,7 +15,7 @@ class Modal extends Component {
    * @returns {node}
    */
   renderActions = actions => {
-    return actions.map((e, i) => <Button onClick={e => {e.close ? e.stopPropagation() : {}}} {...e} key={`modal-action-${i}`} />);
+    return actions.map((e, i) => <Button onClick={this.props.onDismiss} {...e} key={`modal-action-${i}`} />);
   };
 
   render() {
@@ -26,14 +26,17 @@ class Modal extends Component {
 
     return (
       <Portal>
-        <div onClick={onDismiss} className={classes.root}>
+        <div className={classes.root}>
           <div
-            className={classes.content}>
-            <div className={classes.title}>{title}</div>
+            className={classes.content} onClick={(e) => e.stopPropagation()}>
+            <div className={classes.title} >{title} </div>
+            <hr />
             <div className={classes.content}>{content}</div>
-            <div className={classes.actions}>{this.renderActions(actions)}</div>
+
           </div>
+          <div className={classes.actions}>{this.renderActions(actions)}</div>
         </div>
+        <div onClick={onDismiss} className={classes.modalOverlay}></div>
       </Portal>
     );
   }
