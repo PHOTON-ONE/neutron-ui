@@ -24,7 +24,7 @@ storiesOf("Button", module)
     "default",
     () => {
       // Story
-      const story = <Button {...onActions}>Hello World</Button>;
+      const story = <Button variant="contained" color="primary" {...onActions}>Hello World</Button>;
 
       // Testing
       specs(() =>

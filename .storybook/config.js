@@ -4,6 +4,9 @@ import {configure as enzymeConfigure} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { describe, it } from 'storybook-addon-specifications'
 import expect from 'expect'
+import {ThemeProvider} from 'react-jss';
+import theme from './theme';
+import React from 'react';
 
 window.describe = describe
 window.it = it
@@ -95,5 +98,7 @@ addDecorator(
       enableShortcuts: false, // true by default
     })
   );
+
+  addDecorator(story => (<ThemeProvider theme={theme}>{story()}</ThemeProvider>));
 
 configure(loadStories, module);
