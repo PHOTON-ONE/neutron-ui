@@ -5,8 +5,7 @@ import withStyles from "react-jss";
 const styles = {
   root: {
     minWidth: "375px",
-    width: "400px",
-    height: "auto",
+    display: "inline-block",
     minHeight: "200px",
     borderRadius: "8px",
     position: "relative",
@@ -23,7 +22,6 @@ const styles = {
     background: "#BA68C8",
     color: "#fff",
     borderRadius: "8px",
-
   },
   content: {
     position: "relative",
@@ -33,15 +31,15 @@ const styles = {
   },
   thumbnail: {
     borderRadius: "8px",
-    width: "100%",
-    height: "100%",
+    width: "560px",
+    height: "250px",
     marginTop: "-25px"
   },
 };
 
 class NavTile extends Component {
   /**
-   * @description FIlters defined props and returnes object of unknown props.
+   * @description Filters defined props and returnes object of unknown props.
    * @returns {object}
    */
   filterProps = () => {
